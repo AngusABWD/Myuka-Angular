@@ -24,7 +24,7 @@ export class MyukaComponent implements OnInit {
   onSubmit(form: NgForm) {
     let temp = form.value;
     this.http.get('https://world.openfoodfacts.org/api/v0/product/' + temp.EAN ).subscribe((data) => {
-      this.produit = data['code']; 
+      this.produit = data; 
       console.log(this.produit)
     }) ;
   }
