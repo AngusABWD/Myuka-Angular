@@ -1,11 +1,11 @@
-<body class="bg-light">
+<body>
     <div class="container">
     <!--définition de la couleur des textes-->
       <div class="text-primary bg-light">
           <!--en-tête avec le titre-->
           <div class="row">
             <div class="col text-center bg-dark shadow mt-4">
-              <h1><em>My Yuka</em></h1>
+              <p class="titre"><em>My Yuka</em></p>
               <p>Obtenez les informations sur les produits alimentaires</p>
             </div>
           </div>
@@ -33,91 +33,90 @@
               </div>
             </div>
           </div>
-          <!--Blocks Image et Ingrédient côte à côte avec un changement responsive en médium l'un sous l'autre-->
-          <div class="row">
-            <!--modification des margins afin que les blocks soit alignés à l'ensemble de la page-->
-            <div class="col-md text-center px-0 mb-3 mb-md-0 pe-md-2">
-              <!--col-12 col-md-6 text-center px-0 mb-3 mb-md-0 pe-md-2-->
-              <div class="h-100 bg-dark shadow center">
-                  <img class="w-50 mt-3"  src="assets/frosties.jpg" alt="Photo"/>    
+          <div *ngIf="produit === true">
+            <!--Blocks Image et Ingrédient côte à côte avec un changement responsive en médium l'un sous l'autre-->
+            <div class="row">
+              <!--modification des margins afin que les blocks soit alignés à l'ensemble de la page-->
+              <div class="col-md text-center px-0 mb-3 mb-md-0 pe-md-2">
+                <!--col-12 col-md-6 text-center px-0 mb-3 mb-md-0 pe-md-2-->
+                <div class="h-100 bg-dark shadow center">
+                    <img class="w-50 my-3"  src='{{ URLImage }}' alt="Photo du produit"/>    
+                </div>
+              </div>
+              <div class="col-md text-center px-0 mb-3 mb-md-0 ps-md-2">
+                <div class="h-100 bg-dark shadow pt-5">
+                  <p><b><u>Liste des ingrédients :  </u></b></p>
+                  <p>Les ingrédients sont listés par ordre d'importance ( quantité )</p>
+                  <p>{{ ingredients }}</p>
+
+                  <!--présentation des ingrédients ajoutés sous forme de tableau-->
+                  <div class="row">
+                    <!--chaque tableau prendra la moitié du block-->
+                    <table class="w-50"> 
+      
+                    </table>
+                    <table class="w-50 h-25"> 
+          
+                      </table>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md text-center px-0 mb-3 mb-md-0 ps-md-2">
-              <div class="h-100 bg-dark shadow pt-5">
-                <p><b><u>Liste des ingrédients :  </u></b></p>
-                <p>{{ test }}</p>
-                <p>Les ingrédients sont listés par ordre d'importance ( quantité )</p>
-                <p>Maïs, Sucre, arôme de malt d'orge, sirop de glucose, sel<br />
-                <br /><u>Vitamines et minéraux :</u><br />
-                carbonate de calcium<br /> vitamines ( B/PP, B6, B2, B1, B9, D, B12 ), fer </p> 
-                <!--présentation des ingrédients ajoutés sous forme de tableau-->
-                <div class="row">
-                  <!--chaque tableau prendra la moitié du block-->
-                  <table class="w-50"> 
-                    <tr><th>Vitamines&nbsp;ajoutées</th></tr>  
-                    <tr><td>Niacine</td></tr>
-                    <tr><td>Vitamine B6</td></tr>
-                    <tr><td>Riboflavine</td></tr>
-                    <tr><td>Thiamine</td></tr>
-                    <tr><td>Acide folique</td></tr>
-                    <tr><td>Vitamine D</td></tr>
-                    <tr><td>Vitamine B12</td></tr>
-                  </table>
-                  <table class="w-50 h-25"> 
-                    <tr><th>Minéraux&nbsp;ajoutés</th></tr>  
-                    <tr><td>Carbonate de calcium</td></tr>
-                    <tr><td>Fer</td></tr>            
-                    </table>
+            <!--Block sur les allergène avec un bouton cliquable pour les informations-->
+            <div class="row">
+              <div class="col text-center bg-dark shadow p-4">
+                <p><b><u>Substances ou produits provoquant des allergies ou intolérances :</u></b></p> 
+                <p>{{ allergene }}</p>
+                <a type="button" href="https://fr.wikipedia.org/wiki/%C5%92uf_(aliment)" target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="oeufs === true"><i class="	fa fa-exclamation-triangle me-3"></i>Oeuf</a>
+
+                <a type="button" href="https://fr.wikipedia.org/wiki/Gluten" target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="gluten === true"><i class="	fa fa-exclamation-triangle me-3"></i>Gluten</a>
+                <a type="button" href="https://fr.wikipedia.org/wiki/Soja#:~:text=Le%20soja%2C%20nomm%C3%A9%20soya%20au,%2C%20originaire%20d%27Asie%20orientale.&text=Il%20en%20existe%20de%20nombreuses,graines%2C%20la%20p%C3%A9riode%20de%20floraison." 
+                  target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="soja === true"><i class="	fa fa-exclamation-triangle me-3"></i>Soja</a>
+              </div>
+            </div>
+            <!--3 block côte à côte NOVA Nutri-score et Huile de plame, ils se modifierons de façon responsive avec d'abors NOVA et Nutriscore côte à côte
+            et Huile de palme dessous pour les écran à partir de médium puis les uns en dessous des autres pour les smalls -->
+            <div class="row">
+              <div class="col-md col-lg text-center px-0 pe-sm-2 mb-3 mb-lg-0">
+                <div class="h-100 bg-dark shadow center">
+                    <a *ngIf="novaGroup === 4" href="https://fr.wikipedia.org/wiki/NOVA_(nutrition)" target="_blank" title="informations NOVA"><img src="assets/NOVA_group_4.svg.png " alt="NOVA groupe 4"/></a>        
+                    <a *ngIf="novaGroup === 3" href="https://fr.wikipedia.org/wiki/NOVA_(nutrition)" target="_blank" title="informations NOVA"><img src="assets/NOVA_group_3.svg.png " alt="NOVA groupe 3"/></a>      
+                    <a *ngIf="novaGroup === 2" href="https://fr.wikipedia.org/wiki/NOVA_(nutrition)" target="_blank" title="informations NOVA"><img src="assets/NOVA_group_2.svg.png " alt="NOVA groupe 2"/></a>      
+                    <a *ngIf="novaGroup === 1" href="https://fr.wikipedia.org/wiki/NOVA_(nutrition)" target="_blank" title="informations NOVA"><img src="assets/100px-NOVA_group_1.svg.png " alt="NOVA groupe 1"/></a>      
+                </div>
+              </div>
+              <div class="col-md col-lg text-center px-0 ps-sm-2 pe-lg-3 mb-3 mb-lg-0">
+                <div class="h-100 bg-dark shadow">
+                  <a href="#" title="informations Nutri-score"><img class="w-100 m-3"  src="assets/nutriscore.png " alt="Nutri-score"/></a>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg text-center px-0">
+                <!--Block Huile de palme avec boutons d'informations supplémentaires-->
+                <div class="h-100 bg-dark shadow">
+                  <div><button type="button" class="btn btn-success px-3 my-5 round" title="informations supplémentaires"><i class="fa fa-leaf me-3"></i>Sans huile de palme</button></div>
+                  <div><button type="button" class="btn btn-success px-3 mb-3 round" title="informations supplémentaires"><i class="fa fa-cutlery me-3"></i>Végétarien</button></div>
+                  <p class="p-5">L'analyse est basée uniquement sur les ingrédients listés et ne prend pas en compte les méthodes de fabrication.</p>     
+                </div>
+              </div>
+            </div>
+            <!--Block Informations de distribution-->
+            <div class="row">
+              <div class="col text-center bg-dark shadow">
+                <div class="row"><div class="col-12 col-lg-4"><b>Marques&nbsp;:</b>&nbsp;Kellogg's</div><div class="col-12 col-lg-4"><b>Magasins&nbsp;:</b>&nbsp;Intermarché, Magasin&nbsp;U</div><div class="col-12 col-lg-4"><b>Pays&nbsp;de&nbsp;vente&nbsp;:</b>&nbsp;Belgique,&nbsp;France</div></div>
+              </div>
+            </div>
+            <!--Footer avec lien vers d'autres pages-->
+            <div class="row">
+              <div class="col text-center bg-dark shadow p-3">
+                <div>
+                  <a href="#" title="Crédits" class="btn-footer m-3">Crédits</a>
+                  <a href="#" title="Copyright" class="btn-footer m-3">Copyright</a>
+                  <a href="#" title="informations légales" class="btn-footer m-3">Informations&nbsp;légales</a>
+                  <a href="#" title="Contact" class="btn-footer m-3">Contact</a>
                 </div>
               </div>
             </div>
           </div>
-          <!--Block sur les allergène avec un bouton cliquable pour les informations-->
-          <div class="row">
-            <div class="col text-center bg-dark shadow p-4">
-              <p><b><u>Substances ou produits provoquant des allergies ou intolérances :</u></b></p> 
-              <button type="button" class="btn btn-danger px-3 my-2 round"><i class="	fa fa-exclamation-triangle me-3"></i>Gluten</button>
-            </div>
-          </div>
-          <!--3 block côte à côte NOVA Nutri-score et Huile de plame, ils se modifierons de façon responsive avec d'abors NOVA et Nutriscore côte à côte
-          et Huile de palme dessous pour les écran à partir de médium puis les uns en dessous des autres pour les smalls -->
-          <div class="row">
-            <div class="col-md col-lg text-center px-0 pe-sm-2 mb-3 mb-lg-0">
-              <div class="h-100 bg-dark shadow">
-                  <a href="#" title="informations NOVA"><img class="w-50 m-3"  src="assets/1200px-NOVA_group_4.svg.png " alt="NOVA"/></a>        
-              </div>
-            </div>
-            <div class="col-md col-lg text-center px-0 ps-sm-2 pe-lg-3 mb-3 mb-lg-0">
-              <div class="h-100 bg-dark shadow">
-                <a href="#" title="informations Nutri-score"><img class="w-100 m-3"  src="assets/nutriscore.png " alt="Nutri-score"/></a>
-              </div>
-            </div>
-            <div class="col-md-12 col-lg text-center px-0">
-              <!--Block Huile de palme avec boutons d'informations supplémentaires-->
-              <div class="h-100 bg-dark shadow">
-                <div><button type="button" class="btn btn-success px-3 my-5 round" title="informations supplémentaires"><i class="fa fa-leaf me-3"></i>Sans huile de palme</button></div>
-                <div><button type="button" class="btn btn-success px-3 mb-3 round" title="informations supplémentaires"><i class="fa fa-cutlery me-3"></i>Végétarien</button></div>
-                <p class="p-5">L'analyse est basée uniquement sur les ingrédients listés et ne prend pas en compte les méthodes de fabrication.</p>     
-              </div>
-            </div>
-          </div>
-          <!--Block Informations de distribution-->
-          <div class="row">
-            <div class="col text-center bg-dark shadow">
-              <div class="row"><div class="col-12 col-lg-4"><b>Marques&nbsp;:</b>&nbsp;Kellogg's</div><div class="col-12 col-lg-4"><b>Magasins&nbsp;:</b>&nbsp;Intermarché, Magasin&nbsp;U</div><div class="col-12 col-lg-4"><b>Pays&nbsp;de&nbsp;vente&nbsp;:</b>&nbsp;Belgique,&nbsp;France</div></div>
-            </div>
-          </div>
-          <!--Footer avec lien vers d'autres pages-->
-          <div class="row">
-            <div class="col text-center bg-dark shadow p-3">
-              <div>
-                <a href="#" title="Crédits" class="btn-footer m-3">Crédits</a>
-                <a href="#" title="Copyright" class="btn-footer m-3">Copyright</a>
-                <a href="#" title="informations légales" class="btn-footer m-3">Informations&nbsp;légales</a>
-                <a href="#" title="Contact" class="btn-footer m-3">Contact</a>
-              </div>
-            </div>
-          </div>
-        </div>
+         </div>
        </div>
   </body>

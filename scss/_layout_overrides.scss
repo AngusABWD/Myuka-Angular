@@ -1,11 +1,12 @@
 body {
-    color: $dark;
+    background-color: $light;
 }
 .row {
     margin: $marginblock;
 }
-h1 {
+.titre {
     font-family: $font-title ;
+    font-size: $h1-font-size;
 }
 .round {
     border-radius: $round-radius;
