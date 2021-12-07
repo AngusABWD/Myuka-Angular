@@ -9,7 +9,7 @@
               <p>Obtenez les informations sur les produits alimentaires</p>
             </div>
           </div>
-          <!--Formulaire de recherche du produit avec son EAN ( les fonctions ne sont pas définies)-->
+          <!--Formulaire de recherche du produit avec son EAN-->
           <div class="row">
             <div class="col bg-dark shadow ">
               <div class="row justify-content-center">
@@ -21,7 +21,7 @@
                       <p class="h4">Rentrez un Gencode</p>
                       <div class="form-floating"> 
                         <input class="form-control mt-3 bg-primary" id="EAN" name="EAN" type="number" placeholder="EAN.."  max="9999999999999"  ngModel required>
-                        <label class="text-secondary" for="EAN">EAN...13 chiffres</label>
+                        <label class="text-secondary" for="EAN">{{ textForm }}</label>
                       </div>
                     </div>      
                     <!--Bouton d'envoi-->
@@ -44,21 +44,13 @@
                 </div>
               </div>
               <div class="col-md text-center px-0 mb-3 mb-md-0 ps-md-2">
-                <div class="h-100 bg-dark shadow pt-5">
+                <div class="h-100 bg-dark shadow pt-3">
+                  <p class="h4">{{ marque }}</p>
+                  <p>{{ name }}</p>
+                  <p>EAN : {{ textForm }}</p>
                   <p><b><u>Liste des ingrédients :  </u></b></p>
                   <p>Les ingrédients sont listés par ordre d'importance ( quantité )</p>
                   <p>{{ ingredients }}</p>
-
-                  <!--présentation des ingrédients ajoutés sous forme de tableau-->
-                  <div class="row">
-                    <!--chaque tableau prendra la moitié du block-->
-                    <table class="w-50"> 
-      
-                    </table>
-                    <table class="w-50 h-25"> 
-          
-                      </table>
-                  </div>
                 </div>
               </div>
             </div>
@@ -66,12 +58,16 @@
             <div class="row">
               <div class="col text-center bg-dark shadow p-4">
                 <p><b><u>Substances ou produits provoquant des allergies ou intolérances :</u></b></p> 
-                <p>{{ allergene }}</p>
+                <p>{{ allergeneList }}</p>
                 <a type="button" href="https://fr.wikipedia.org/wiki/%C5%92uf_(aliment)" target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="oeufs === true"><i class="	fa fa-exclamation-triangle me-3"></i>Oeuf</a>
-
+                <a type="button" href="https://fr.wikipedia.org/wiki/Lait" target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="lait === true"><i class="	fa fa-exclamation-triangle me-3"></i>Lait</a>
+                <a type="button" href="https://fr.wikipedia.org/wiki/Fruit_%C3%A0_coque" target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="coque === true"><i class="	fa fa-exclamation-triangle me-3"></i>Fruits à coque</a>
                 <a type="button" href="https://fr.wikipedia.org/wiki/Gluten" target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="gluten === true"><i class="	fa fa-exclamation-triangle me-3"></i>Gluten</a>
                 <a type="button" href="https://fr.wikipedia.org/wiki/Soja#:~:text=Le%20soja%2C%20nomm%C3%A9%20soya%20au,%2C%20originaire%20d%27Asie%20orientale.&text=Il%20en%20existe%20de%20nombreuses,graines%2C%20la%20p%C3%A9riode%20de%20floraison." 
                   target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="soja === true"><i class="	fa fa-exclamation-triangle me-3"></i>Soja</a>
+                <a type="button" href="https://fr.wikipedia.org/wiki/C%C3%A9leri#:~:text=Le%20c%C3%A9leri%20(Apium%20graveolens%20L,racine%20tub%C3%A9ris%C3%A9e%20consomm%C3%A9es%20comme%20l%C3%A9gumes." target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="celeri === true"><i class="	fa fa-exclamation-triangle me-3"></i>Céleri</a>
+                <a type="button" href="https://fr.wikipedia.org/wiki/Arachide" target="_blank" class="btn btn-danger px-3 m-2 round" *ngIf="arachides === true"><i class="	fa fa-exclamation-triangle me-3"></i>Arachides</a>
+
               </div>
             </div>
             <!--3 block côte à côte NOVA Nutri-score et Huile de plame, ils se modifierons de façon responsive avec d'abors NOVA et Nutriscore côte à côte
@@ -83,18 +79,50 @@
                     <a *ngIf="novaGroup === 3" href="https://fr.wikipedia.org/wiki/NOVA_(nutrition)" target="_blank" title="informations NOVA"><img src="assets/NOVA_group_3.svg.png " alt="NOVA groupe 3"/></a>      
                     <a *ngIf="novaGroup === 2" href="https://fr.wikipedia.org/wiki/NOVA_(nutrition)" target="_blank" title="informations NOVA"><img src="assets/NOVA_group_2.svg.png " alt="NOVA groupe 2"/></a>      
                     <a *ngIf="novaGroup === 1" href="https://fr.wikipedia.org/wiki/NOVA_(nutrition)" target="_blank" title="informations NOVA"><img src="assets/100px-NOVA_group_1.svg.png " alt="NOVA groupe 1"/></a>      
+                    <p *ngIf="novaGroup === 5" class="center">Aucun groupe Nova répertorié</p>      
                 </div>
               </div>
               <div class="col-md col-lg text-center px-0 ps-sm-2 pe-lg-3 mb-3 mb-lg-0">
                 <div class="h-100 bg-dark shadow">
-                  <a href="#" title="informations Nutri-score"><img class="w-100 m-3"  src="assets/nutriscore.png " alt="Nutri-score"/></a>
+                  <p class="pt-3" *ngIf="nutriscore === 'z'" >Aucun Nutriscore répertorié</p>  
+                  <a *ngIf="nutriscore === 'a'" href="https://www.santepubliquefrance.fr/determinants-de-sante/nutrition-et-activite-physique/articles/nutri-score" target="_blank" title="Nutriscore"><img class="mt-3 w-75" src="assets\nutriscoreA.png" alt="Information sur le nutriscore"/></a>      
+                  <a *ngIf="nutriscore === 'b'" href="https://www.santepubliquefrance.fr/determinants-de-sante/nutrition-et-activite-physique/articles/nutri-score" target="_blank" title="Nutriscore"><img class="mt-3 w-75" src="assets\nutriscoreB.png" alt="Information sur le nutriscore"/></a>      
+                  <a *ngIf="nutriscore === 'c'" href="https://www.santepubliquefrance.fr/determinants-de-sante/nutrition-et-activite-physique/articles/nutri-score" target="_blank" title="Nutriscore"><img class="mt-3 w-75" src="assets\nutriscoreC.png" alt="Information sur le nutriscore"/></a>      
+                  <a *ngIf="nutriscore === 'd'" href="https://www.santepubliquefrance.fr/determinants-de-sante/nutrition-et-activite-physique/articles/nutri-score" target="_blank" title="Nutriscore"><img class="mt-3 w-75" src="assets\nutriscoreD.png" alt="Information sur le nutriscore"/></a>      
+                  <a *ngIf="nutriscore === 'e'" href="https://www.santepubliquefrance.fr/determinants-de-sante/nutrition-et-activite-physique/articles/nutri-score" target="_blank" title="Nutriscore"><img class="mt-3 w-75" src="assets\nutriscoreE.png" alt="Information sur le nutriscore"/></a> 
+                  <p class="mt-3 "><b>Repères nutritionnels pour 100g :</b></p>
+                  <div class="row fs-7">
+                    <div class=" col-1 ball mx-1" [ngClass]="{'bg-success': fatScore === 1, 'bg-warning': fatScore === 2, 'bg-danger': fatScore === 3 }"></div><div class="col-10">{{ fat100 }} g Matières grasse taux : {{ txFat }}</div> 
+                  </div>
+                  <div class="row fs-7">
+                   <div class=" col-1 ball mx-1" [ngClass]="{'bg-success': saturatedScore === 1, 'bg-warning': saturatedScore === 2, 'bg-danger': saturatedScore === 3 }"></div><div class="col-10">{{ saturatedFat100 }} g Acides gras saturés taux : {{ txSaturated }}</div> 
+                  </div>
+                  <div class="row fs-7">
+                    <div class=" col-1 ball mx-1" [ngClass]="{'bg-success': sugarScore === 1, 'bg-warning': sugarScore === 2, 'bg-danger': sugarScore === 3 }"></div><div class="col-10">{{ sugar100 }} g Sucres taux : {{ txSugar }}</div> 
+                  </div>
+                  <div class="row fs-7">
+                    <div class=" col-1 ball mx-1" [ngClass]="{'bg-success': saltScore === 1, 'bg-warning': saltScore === 2, 'bg-danger': saltScore === 3 }"></div><div class="col-10">{{ salt100 }} g Sel taux : {{ txSalt }}</div> 
+                  </div>
                 </div>
               </div>
               <div class="col-md-12 col-lg text-center px-0">
-                <!--Block Huile de palme avec boutons d'informations supplémentaires-->
+                <!--Block Huile de palme et informations végan ou végétarien-->
                 <div class="h-100 bg-dark shadow">
-                  <div><button type="button" class="btn btn-success px-3 my-5 round" title="informations supplémentaires"><i class="fa fa-leaf me-3"></i>Sans huile de palme</button></div>
-                  <div><button type="button" class="btn btn-success px-3 mb-3 round" title="informations supplémentaires"><i class="fa fa-cutlery me-3"></i>Végétarien</button></div>
+                  <div>
+                    <button *ngIf="palm === 1" type="button" class="btn dis btn-success px-3 mt-5 mb-3 round" title="Sans huile de palme" ><i class="fa fa-leaf me-3"></i>Sans huile de palme</button>
+                    <button *ngIf="palm === 2" type="button" class="btn dis btn-danger px-3 mt-5 mb-3 round" title="Huile de palme"><i class="fa fa-leaf me-3"></i>Huile de palme</button>
+                    <button *ngIf="palm === 3" type="button" class="btn dis btn-warning px-3 mt-5 mb-3 round" title="Statut huile de palme inconnu"><i class="fa fa-leaf me-3"></i>Statut huile de palme inconnu</button>
+                  </div>
+                  <div>
+                    <button *ngIf="vegetarien === 1" type="button" class="btn dis btn-success px-3 mb-3 round" title="Végétarien"><i class="fa fa-cutlery me-3"></i>Végétarien</button>
+                    <button *ngIf="vegetarien === 2" type="button" class="btn dis btn-danger px-3 mb-3 round" title="Non-végétarien"><i class="fa fa-cutlery me-3"></i>Non-végétarien</button>
+                    <button *ngIf="vegetarien === 3" type="button" class="btn dis btn-warning px-3 mb-3 round" title="Statut végétarien inconnu"><i class="fa fa-cutlery me-3"></i>Statut végétarien inconnu</button>
+                  </div>
+                  <div>
+                    <button *ngIf="vegan === 1" type="button" class="btn dis btn-success px-3 mb-3 round" title="Végan"><i class="fa fa-cutlery me-3"></i>Végan</button>
+                    <button *ngIf="vegan === 2" type="button" class="btn dis btn-danger px-3 mb-3 round" title="Non-végan"><i class="fa fa-cutlery me-3"></i>Non-végan</button>
+                    <button *ngIf="vegan === 3" type="button" class="btn dis btn-warning px-3 mb-3 round" title="Statut végan inconnu"><i class="fa fa-cutlery me-3"></i>Statut végan inconnu</button>
+                  </div>
                   <p class="p-5">L'analyse est basée uniquement sur les ingrédients listés et ne prend pas en compte les méthodes de fabrication.</p>     
                 </div>
               </div>
@@ -102,21 +130,22 @@
             <!--Block Informations de distribution-->
             <div class="row">
               <div class="col text-center bg-dark shadow">
-                <div class="row"><div class="col-12 col-lg-4"><b>Marques&nbsp;:</b>&nbsp;Kellogg's</div><div class="col-12 col-lg-4"><b>Magasins&nbsp;:</b>&nbsp;Intermarché, Magasin&nbsp;U</div><div class="col-12 col-lg-4"><b>Pays&nbsp;de&nbsp;vente&nbsp;:</b>&nbsp;Belgique,&nbsp;France</div></div>
-              </div>
-            </div>
-            <!--Footer avec lien vers d'autres pages-->
-            <div class="row">
-              <div class="col text-center bg-dark shadow p-3">
-                <div>
-                  <a href="#" title="Crédits" class="btn-footer m-3">Crédits</a>
-                  <a href="#" title="Copyright" class="btn-footer m-3">Copyright</a>
-                  <a href="#" title="informations légales" class="btn-footer m-3">Informations&nbsp;légales</a>
-                  <a href="#" title="Contact" class="btn-footer m-3">Contact</a>
-                </div>
+                <div class="row"><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Fabriquant&nbsp;:</b>&nbsp;{{ fabriquant }}</p></div><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Magasins&nbsp;:</b>&nbsp;{{ magasins }}</p></div><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Pays&nbsp;de&nbsp;vente&nbsp;:</b>&nbsp;{{ pays }}</p></div></div>
               </div>
             </div>
           </div>
+            <!--Footer avec liens vers d'autres components-->
+            <div class="row">
+              <div class="col text-center bg-dark shadow p-3">
+                <div>
+                  <a routerLink="credits" title="Crédits" class="btn-footer m-3">Crédits</a>
+                  <a routerLink="copyright" title="Copyright" class="btn-footer m-3">Copyright</a>
+                  <a routerLink="informations" title="informations légales" class="btn-footer m-3">Informations&nbsp;légales</a>
+                  <a routerLink="contact" title="Contact" class="btn-footer m-3">Contact</a>
+                </div>
+              </div>
+            </div>
+          
          </div>
        </div>
   </body>

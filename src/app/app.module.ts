@@ -5,11 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyukaComponent } from './myuka/myuka.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CreditsComponent } from './credits/credits.component';
+import { CopyrightComponent } from './copyright/copyright.component';
+import { InformationsComponent } from './informations/informations.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyukaComponent,
+    CreditsComponent,
+    CopyrightComponent,
+    InformationsComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
