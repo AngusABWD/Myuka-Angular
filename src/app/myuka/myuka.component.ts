@@ -130,10 +130,10 @@ export class MyukaComponent implements OnInit {
     if ( this.ingredientAnalyse !== undefined ) {
       if ( this.ingredientAnalyse[0].match(/palm-oil-free/gi)) {
       this.palm = 1;
-      } else if ( this.ingredientAnalyse[0].match(/palm-oil/gi)){
-        this.palm = 2;
-      } else {
+      } else if ( this.ingredientAnalyse[0].match(/unknown/gi)){
         this.palm = 3;
+      } else {
+        this.palm = 2;
       }
       if ( this.ingredientAnalyse[1].match(/maybe-vegan/gi)) {
         this.vegan = 1;
