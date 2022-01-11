@@ -8,6 +8,7 @@ import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   {path:'', component: MyukaComponent},
+  {path:'foodfacts', component: MyukaComponent},
   {path:'credits', component: CreditsComponent},
   {path:'copyright', component: CopyrightComponent},
   {path:'informations', component: InformationsComponent},

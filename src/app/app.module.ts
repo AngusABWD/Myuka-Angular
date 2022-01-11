@@ -9,6 +9,7 @@ import { CreditsComponent } from './credits/credits.component';
 import { CopyrightComponent } from './copyright/copyright.component';
 import { InformationsComponent } from './informations/informations.component';
 import { ContactComponent } from './contact/contact.component';
+import { LegalComponent } from './legal/legal.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ContactComponent } from './contact/contact.component';
     CopyrightComponent,
     InformationsComponent,
     ContactComponent,
+    LegalComponent,
   ],
   imports: [
     BrowserModule,
