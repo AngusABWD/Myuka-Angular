@@ -12,7 +12,8 @@ const routes: Routes = [
   {path:'credits', component: CreditsComponent},
   {path:'copyright', component: CopyrightComponent},
   {path:'informations', component: InformationsComponent},
-  {path:'contact', component: ContactComponent}
+  {path:'contact', component: ContactComponent},
+  {path:'**', redirectTo: 'foodfacts'},
   
 ];
 
