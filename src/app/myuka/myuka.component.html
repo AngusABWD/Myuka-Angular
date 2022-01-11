@@ -14,7 +14,7 @@
             <div class="col bg-dark shadow ">
               <div class="row justify-content-center">
                 <!--responsive 8 et 6 colonnes afin de conserver une largeur suffisante-->
-                <div class="col-8 col-md-6 text-center">
+                <div class="col-12 col-md-8 col-lg-4 text-center">
                   <!--Formulaire champ de saisie-->
                   <form (ngSubmit)="onSubmit(f)" #f="ngForm" >
                     <div class="form-group m-3">
@@ -129,21 +129,17 @@
             </div>
             <!--Block Informations de distribution-->
             <div class="row">
-              <div class="col text-center bg-dark shadow">
-                <div class="row"><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Fabriquant&nbsp;:</b>&nbsp;{{ fabriquant }}</p></div><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Magasins&nbsp;:</b>&nbsp;{{ magasins }}</p></div><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Pays&nbsp;de&nbsp;vente&nbsp;:</b>&nbsp;{{ pays }}</p></div></div>
+              <div class="col text-center p-0 bg-dark shadow">
+                <div class="row m-0 mt-3"><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Fabriquant&nbsp;:</b>&nbsp;{{ fabriquant }}</p></div><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Magasins&nbsp;:</b>&nbsp;{{ magasins }}</p></div><div class="col-12 col-lg-4"><p class="overflow-auto"><b>Pays&nbsp;de&nbsp;vente&nbsp;:</b>&nbsp;{{ pays }}</p></div></div>
               </div>
             </div>
           </div>
             <!--Footer avec liens vers d'autres components-->
-            <div class="row">
-              <div class="col text-center bg-dark shadow p-3">
-                <div>
-                  <a [routerLink]="['../credits']" title="Crédits" class="btn-footer m-3">Crédits</a>
-                  <a [routerLink]="['../copyright']" title="Copyright" class="btn-footer m-3">Copyright</a>
-                  <a [routerLink]="['../informations']" title="informations légales" class="btn-footer m-3">Informations&nbsp;légales</a>
-                  <a [routerLink]="['../contact']" title="Contact" class="btn-footer m-3">Contact</a>
-                </div>
-              </div>
+            <div class="row justify-content-center bg-dark shadow p-3">
+                  <div [routerLink]="['../credits']" title="Crédits" class="col-6 col-lg-3 btn-footer center">Crédits</div>
+                  <div [routerLink]="['../copyright']" title="Copyright" class="col-6 col-lg-3 btn-footer center">Copyright</div>
+                  <div [routerLink]="['../informations']" title="informations légales" class="col-12 col-sm-6 col-lg-3 btn-footer center">Informations&nbsp;légales</div>
+                  <div [routerLink]="['../contact']" title="Contact" class="col-12 col-sm-6 col-lg-3 btn-footer center">Contact</div>   
             </div>
           
          </div>
